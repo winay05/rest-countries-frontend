@@ -38,7 +38,7 @@ const getCountry = async (param, byName = true) => {
     info = await fetch(url);
     // console.log(info);
     if (info.status !== 200) {
-      alert("Not found");
+      // alert("Not found");
     } else {
       info = await info.json();
 
@@ -46,7 +46,7 @@ const getCountry = async (param, byName = true) => {
     }
   } catch (err) {
     console.log(err);
-    alert("couldnt get the country");
+    // alert("couldnt get the country");
   }
 };
 class CountryDetails extends Component {
@@ -64,7 +64,7 @@ class CountryDetails extends Component {
 
     let neighbors = info.borders;
     neighbors = await getCountry(neighbors, false);
-    neighbors = neighbors.map((el) => el.name);
+    neighbors = neighbors?.map((el) => el.name);
     info.borders = neighbors;
     // console.log(info);
 

@@ -10,9 +10,20 @@ class Home extends Component {
     this.state = {
       filteredCountries: [],
       searchText: "",
-      region: "",
     };
   }
+  filterByRegion = (e) => {
+    let newCountries;
+    if (e.target.value === "") {
+      newCountries = [...this.countries];
+    } else {
+      newCountries = [
+        ...this.countries.filter((el) => el.region === e.target.value),
+      ];
+    }
+    this.setState({ filteredCountries: [...newCountries] });
+    // console.log(e.target.value);
+  };
   validateResponse = (res) => {
     if (res.length < 1) {
       alert("No country found!");
@@ -65,8 +76,12 @@ class Home extends Component {
               <input placeholder="Search for a country..." />
             </Col>
             <Col xs={12} sm={5} lg={4}>
-              <select defaultChecked="0" aria-label="Default select example">
-                <option value="default">Filter by Region</option>
+              <select
+                defaultChecked="0"
+                aria-label="Default select example"
+                onChange={this.filterByRegion}
+              >
+                <option value="">Filter by Region</option>
                 {this.regions.map((val) => (
                   <option value={val}>{val}</option>
                 ))}

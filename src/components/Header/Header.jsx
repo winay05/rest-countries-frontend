@@ -3,7 +3,7 @@ import { Container, Nav, Navbar, Button } from "react-bootstrap";
 const Header = () => (
   <Navbar>
     <Container>
-      <Navbar.Brand href="#home">Where in the world?</Navbar.Brand>
+      <Navbar.Brand href="/">Where in the world?</Navbar.Brand>
       <Nav>
         <Button variant="light">
           <img src="moon.png" alt="" /> Dark mode
