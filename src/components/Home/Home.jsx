@@ -89,7 +89,13 @@ class Home extends Component {
     }
   };
   async componentDidMount() {
-    this.countries = await this.getCountries();
+    if (!window.localStorage.getItem("countries")) {
+      console.log("calling api");
+      this.countries = await this.getCountries();
+      window.localStorage.setItem("countries", JSON.stringify(this.countries));
+    } else
+      this.countries = JSON.parse(window.localStorage.getItem("countries"));
+
     this.regions = Array.from(
       new Set(
         this.countries
@@ -101,12 +107,10 @@ class Home extends Component {
   }
 
   render() {
-    // console.log(this.state.filteredCountries);
-    // console.log(this.regions);
     return (
       <>
         <Container className="mt-5">
-          <Row className="d-flex justify-content-between action-bar">
+          <Row classNam="action-bar">
             <Col xs={12} sm={5} lg={4}>
               <input
                 placeholder="Search for a country..."
@@ -123,9 +127,6 @@ class Home extends Component {
                 {this.regions.map((val) => (
                   <option value={val}>{val}</option>
                 ))}
-                {/* <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option> */}
               </select>
             </Col>
           </Row>

@@ -1,13 +1,20 @@
-import { Container, Nav, Navbar, Button } from "react-bootstrap";
+import { Container, Nav, Navbar } from "react-bootstrap";
+
+import styles from "./Header.module.css";
 
 const Header = () => (
-  <Navbar>
+  <Navbar className={styles.navigation}>
     <Container>
-      <Navbar.Brand href="/">Where in the world?</Navbar.Brand>
+      <Navbar.Brand className="title" href="/">
+        Where in the world?
+      </Navbar.Brand>
       <Nav>
-        <Button variant="light">
-          <img src="moon.png" alt="" /> Dark mode
-        </Button>
+        <div className="title" role="button">
+          <img src="moon-regular.svg" style={{ height: 30 }} alt="" /> Dark mode
+        </div>
+        {/* <Button className="title" variant="light">
+          
+        </Button> */}
       </Nav>
     </Container>
   </Navbar>
