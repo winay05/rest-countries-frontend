@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Card, Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
+import "./Home.css";
+
 class Home extends Component {
   constructor() {
     super();
@@ -39,7 +41,7 @@ class Home extends Component {
     } else {
       this.setState((state) => {
         return {
-          filteredProducts: this.countries,
+          filteredCountries: this.countries,
         };
       });
     }
@@ -66,13 +68,11 @@ class Home extends Component {
     }
     return true;
   };
-  getCountries = async () => {
-    let response = [];
 
+  performAPICall = async (url) => {
+    let response = [];
     try {
-      response = await fetch(
-        "https://restcountries.eu/rest/v2/all?fields=name;capital;flag;population;region"
-      );
+      response = await fetch(url);
 
       if (response.status === 200) {
         response = await response.json();
@@ -83,7 +83,20 @@ class Home extends Component {
       }
     } catch (err) {
       console.log(err);
-      console.log("failed to get flags");
+    } finally {
+      return response;
+    }
+  };
+  getCountries = async () => {
+    let response = [];
+
+    try {
+      response = await this.performAPICall(
+        "https://restcountries.eu/rest/v2/all?fields=name;capital;flag;population;region"
+      );
+    } catch (err) {
+      console.log(err);
+      // console.log("failed to get flags");
     } finally {
       return response;
     }
@@ -110,15 +123,17 @@ class Home extends Component {
     return (
       <>
         <Container className="mt-5">
-          <Row classNam="action-bar">
-            <Col xs={12} sm={5} lg={4}>
+          <Row className="action-bar">
+            <Col xs={12} sm={3}>
               <input
+                className="control-element"
                 placeholder="Search for a country..."
                 onChange={this.debounceSearch}
               />
             </Col>
-            <Col xs={12} sm={5} lg={4}>
+            <Col xs={12} sm={2}>
               <select
+                className="control-element"
                 defaultChecked="0"
                 aria-label="Default select example"
                 onChange={this.filterByRegion}
@@ -130,23 +145,32 @@ class Home extends Component {
               </select>
             </Col>
           </Row>
-          <Row>
+          <Row className="card-container">
             {this.state.filteredCountries.map((country) => (
-              <Col sm={3} xs={12}>
+              <Col lg={3} md={4} xs={12}>
                 <Link to={`/country/${country.name}`}>
-                  <Card style={{ width: "18rem" }}>
-                    <Card.Img variant="top" src={country.flag} />
-                    <Card.Body>
-                      <Card.Title>{country.name}</Card.Title>
+                  <Card className="card">
+                    <Card.Img
+                      className="img-fluid card-img"
+                      variant="top"
+                      src={country.flag}
+                    />
+                    <Card.Body className="card-body">
+                      <Card.Title className="title mb-3">
+                        {country.name}
+                      </Card.Title>
 
                       <p>
-                        <strong>Population</strong>: {country.population}
+                        <strong className="subtitle">Population</strong>:{" "}
+                        {country.population}
                       </p>
                       <p>
-                        <strong>Region</strong>: {country.region}
+                        <strong className="subtitle">Region</strong>:{" "}
+                        {country.region}
                       </p>
                       <p>
-                        <strong>Capital</strong>: {country.capital}
+                        <strong className="subtitle">Capital</strong>:{" "}
+                        {country.capital}
                       </p>
                     </Card.Body>
                   </Card>

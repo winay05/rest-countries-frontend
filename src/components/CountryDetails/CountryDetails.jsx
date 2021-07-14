@@ -2,6 +2,8 @@ import { Component } from "react";
 import { Card, Col, Container, Image, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
+import "./CountryDetails.css";
+
 const reqFields = [
   "flag",
   "name",
@@ -75,8 +77,10 @@ class CountryDetails extends Component {
   render() {
     return (
       <Container>
-        <Row>
-          <Link to="/">Back</Link>
+        <Row className="action-bar">
+          <Link className="link-button control-element" to="/">
+            Back
+          </Link>
         </Row>
         <Row className="d-flex justify-content-center">
           <Col xs={12} sm={5}>
