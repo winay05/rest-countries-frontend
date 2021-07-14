@@ -1,0 +1,37 @@
+.action-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* background-color: yellow; */
+  padding: 1rem 0;
+}
+.control-element {
+  padding: 1rem;
+  border-radius: 15px;
+  background-color: white;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.card-container {
+  margin-top: 2rem !important;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+}
+
+.card-container > [class*="col-"] {
+  /* margin: 1rem; */
+  margin-bottom: 1rem;
+}
+.card {
+  height: 100%;
+  color: black;
+}
+.card-img {
+  height: 45% !important;
+  width: 100% !important;
+}
+.card-body {
+  height: 55% !important;
+}
