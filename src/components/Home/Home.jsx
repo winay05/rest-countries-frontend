@@ -7,6 +7,8 @@ class Home extends Component {
     super();
     this.countries = [];
     this.regions = [];
+    this.debounceTimeout = 0;
+
     this.state = {
       filteredCountries: [],
       searchText: "",
@@ -24,6 +26,39 @@ class Home extends Component {
     this.setState({ filteredCountries: [...newCountries] });
     // console.log(e.target.value);
   };
+
+  search = (text) => {
+    if (text.length > 0) {
+      this.setState((state) => {
+        return {
+          filteredCountries: this.countries.filter((el) =>
+            el.name.toLowerCase().includes(text.toLowerCase())
+          ),
+        };
+      });
+    } else {
+      this.setState((state) => {
+        return {
+          filteredProducts: this.countries,
+        };
+      });
+    }
+  };
+
+  debounceSearch = (event) => {
+    let txt = event.target.value;
+
+    if (this.debounceTimeout) {
+      clearTimeout(this.debounceTimeout);
+    }
+    this.debounceTimeout = setTimeout(
+      function () {
+        this.search(txt);
+      }.bind(this),
+      300
+    );
+  };
+
   validateResponse = (res) => {
     if (res.length < 1) {
       alert("No country found!");
@@ -73,7 +108,10 @@ class Home extends Component {
         <Container className="mt-5">
           <Row className="d-flex justify-content-between action-bar">
             <Col xs={12} sm={5} lg={4}>
-              <input placeholder="Search for a country..." />
+              <input
+                placeholder="Search for a country..."
+                onChange={this.debounceSearch}
+              />
             </Col>
             <Col xs={12} sm={5} lg={4}>
               <select
