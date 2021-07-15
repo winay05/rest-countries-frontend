@@ -98,7 +98,11 @@ class CountryDetails extends Component {
         </Row>
         <Row className="d-flex justify-content-between">
           <Col xs={12} sm={5}>
-            <Image style={{ width: "100%" }} src={this.state.info.flag} />
+            <Image
+              style={{ width: "100%" }}
+              src={this.state.info.flag}
+              alt={`${this.state.info.name}-flag`}
+            />
           </Col>
           <Col xs={12} sm={6}>
             <Card className="details-card">

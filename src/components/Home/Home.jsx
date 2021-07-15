@@ -154,6 +154,7 @@ class Home extends Component {
                       className="img-fluid card-img"
                       variant="top"
                       src={country.flag}
+                      alt={`${country.name}-flag`}
                     />
                     <Card.Body className="card-body">
                       <Card.Title className="title mb-3">
