@@ -162,23 +162,25 @@ class CountryDetails extends Component {
                 </Row>
               </Card.Body>
             </Card>
-            {this.state.info.borders?.length > 0 ? (
-              <Col className="mt-3 neighbor-container" xs={12}>
-                <strong className="subtitle">Border Countries: </strong>{" "}
-                {this.state.info.borders?.map((el) => (
-                  <a
-                    className="link-button details-control-element"
-                    href={`/country/${el}`}
-                    role="button"
-                  >
-                    {el}
-                  </a>
-                ))}
-              </Col>
-            ) : (
-              ""
-            )}
           </Col>
+        </Row>
+        <Row>
+          {this.state.info.borders?.length > 0 ? (
+            <Col className="mt-3 neighbor-container" xs={12}>
+              <strong className="subtitle">Border Countries: </strong>{" "}
+              {this.state.info.borders?.map((el) => (
+                <a
+                  className="link-button details-control-element"
+                  href={`/country/${el}`}
+                  role="button"
+                >
+                  {el}
+                </a>
+              ))}
+            </Col>
+          ) : (
+            ""
+          )}
         </Row>
       </Container>
     );

@@ -147,7 +147,7 @@ class Home extends Component {
           </Row>
           <Row className="card-container">
             {this.state.filteredCountries.map((country) => (
-              <Col lg={3} md={4} xs={12}>
+              <Col xs={12} sm={6} md={4} lg={3}>
                 <Link to={`/country/${country.name}`}>
                   <Card className="card">
                     <Card.Img
