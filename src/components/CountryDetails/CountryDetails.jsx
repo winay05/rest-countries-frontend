@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Card, Col, Container, Image, Row } from "react-bootstrap";
+import { Card, Col, Container, Image, Row, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 import "./CountryDetails.css";
@@ -60,14 +60,22 @@ class CountryDetails extends Component {
   }
   async componentDidMount() {
     const countryName = this.props.history.location.pathname.split("/")[2];
+    let info;
 
-    let info = (await getCountry(countryName, true))[0];
-    // console.log(info);
+    if (!window.localStorage.getItem(countryName)) {
+      info = (await getCountry(countryName, true))[0];
+      // console.log(info);
 
-    let neighbors = info.borders;
-    neighbors = await getCountry(neighbors, false);
-    neighbors = neighbors?.map((el) => el.name);
-    info.borders = neighbors;
+      let neighbors = info.borders;
+      neighbors = await getCountry(neighbors, false);
+      neighbors = neighbors?.map((el) => el.name);
+      info.borders = neighbors;
+
+      window.localStorage.setItem(countryName, JSON.stringify(info));
+    } else {
+      info = JSON.parse(window.localStorage.getItem(countryName));
+    }
+
     // console.log(info);
 
     // console.log(info);
@@ -77,66 +85,99 @@ class CountryDetails extends Component {
   render() {
     return (
       <Container>
-        <Row className="action-bar">
-          <Link className="link-button control-element" to="/">
-            Back
+        {/* <div className="row details-action-bar"></div> */}
+        <Row styles={{ width: "auto" }} className="details-action-bar">
+          <Link className="" to="/">
+            <Button
+              variant="light"
+              className="details-control-element subtitle"
+            >
+              {" "}
+              <span>
+                <img src="arrow-back.svg" alt="" /> Back
+              </span>
+            </Button>
           </Link>
         </Row>
-        <Row className="d-flex justify-content-center">
+        <Row className="d-flex justify-content-between">
           <Col xs={12} sm={5}>
-            <Image src={this.state.info.flag} />
+            <Image style={{ width: "100%" }} src={this.state.info.flag} />
           </Col>
-          <Col xs={12} sm={5}>
-            <Card>
-              <Card.Title>{this.state.info.name}</Card.Title>
-              <br />
-              <p>
-                <strong>Native name: </strong>
-                {this.state.info.nativeName}
-              </p>
-              <p>
-                <strong>Population: </strong>
-                {this.state.info.population}
-              </p>
-              <p>
-                <strong>Region: </strong>
-                {this.state.info.region}
-              </p>
-              <p>
-                <strong>Sub region: </strong>
-                {this.state.info.subRegion}
-              </p>
-              <p>
-                <strong>Capital: </strong>
-                {this.state.info.capital}
-              </p>
-              <p>
-                <strong>Top level domain: </strong>
-                {this.state.info.topLevelDomain?.join(", ")}
-              </p>
-              <p>
-                <strong>Currencies: </strong>
-                {this.state.info.currencies?.map((e) => (
-                  <span>{e.name}</span>
-                ))}
-              </p>
-              <p>
-                <strong>Languages: </strong>
-                {this.state.info.languages?.map((e) => (
-                  <span>{e.name}</span>
-                ))}
-              </p>
+          <Col xs={12} sm={6}>
+            <Card className="details-card">
+              <Card.Header
+                style={{
+                  border: "none",
+                  backgroundColor: "inherit",
+                  paddingTop: "2rem",
+                }}
+              >
+                <Card.Title className="title">
+                  {this.state.info.name}
+                </Card.Title>
+              </Card.Header>
+
+              <Card.Body>
+                <Row>
+                  <Col sm={6} xs={12}>
+                    <p>
+                      <strong className="subtitle">Native name: </strong>
+                      {this.state.info.nativeName}
+                    </p>
+                    <p>
+                      <strong className="subtitle">Population: </strong>
+                      {this.state.info.population}
+                    </p>
+                    <p>
+                      <strong className="subtitle">Region: </strong>
+                      {this.state.info.region}
+                    </p>
+                    <p>
+                      <strong className="subtitle">Sub region: </strong>
+                      {this.state.info.subRegion}
+                    </p>
+                    <p>
+                      <strong className="subtitle">Capital: </strong>
+                      {this.state.info.capital}
+                    </p>
+                  </Col>
+                  <Col sm={6} xs={12}>
+                    <p>
+                      <strong className="subtitle">Top level domain: </strong>
+                      {this.state.info.topLevelDomain?.join(", ")}
+                    </p>
+                    <p>
+                      <strong className="subtitle">Currencies: </strong>
+                      {this.state.info.currencies?.map((e) => (
+                        <span>{e.name}</span>
+                      ))}
+                    </p>
+                    <p>
+                      <strong className="subtitle">Languages: </strong>
+                      {this.state.info.languages?.map((e) => (
+                        <span>{e.name}</span>
+                      ))}
+                    </p>
+                  </Col>
+                </Row>
+              </Card.Body>
             </Card>
-            <Row>
-              <strong>Border Countries: </strong>{" "}
-              <span>
+            {this.state.info.borders?.length > 0 ? (
+              <Col className="mt-3 neighbor-container" xs={12}>
+                <strong className="subtitle">Border Countries: </strong>{" "}
                 {this.state.info.borders?.map((el) => (
-                  <a href={`/country/${el}`} role="button">
+                  <a
+                    className="link-button details-control-element"
+                    href={`/country/${el}`}
+                    role="button"
+                  >
                     {el}
                   </a>
                 ))}
-              </span>
-            </Row>
+              </Col>
+            ) : (
+              ""
+            )}
           </Col>
         </Row>
       </Container>

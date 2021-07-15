@@ -35,3 +35,28 @@
 .card-body {
   height: 55% !important;
 }
+
+@media screen and (max-width: 580px) {
+  .card-container > [class*="col-"] {
+    display: flex;
+    /* flex-direction: column !important; */
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  .card-container {
+    margin-top: 1rem !important;
+  }
+  .card-container > [class*="col-"] > a {
+    width: 90% !important;
+  }
+  .card {
+    height: fit-content !important;
+    /* width: 90% !important; */
+  }
+  .card-body {
+    height: fit-content !important;
+  }
+  .action-bar > [class*="col-"] {
+    margin-bottom: 1rem;
+  }
+}
