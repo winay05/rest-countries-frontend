@@ -92,10 +92,7 @@ class CountryDetails extends Component {
               variant="light"
               className="details-control-element subtitle"
             >
-              {" "}
-              <span>
-                <img src="arrow-back.svg" alt="" /> Back
-              </span>
+              Back
             </Button>
           </Link>
         </Row>

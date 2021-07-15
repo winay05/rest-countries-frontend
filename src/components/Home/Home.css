@@ -8,9 +8,13 @@
 .control-element {
   padding: 1rem;
   border-radius: 15px;
-  background-color: white;
+  background-color: var(--elements-background);
+  color: var(--text-color);
   margin-top: 10px;
   margin-bottom: 10px;
+}
+input.control-element {
+  color: var(--input-text);
 }
 
 .card-container {
@@ -26,7 +30,8 @@
 }
 .card {
   height: 100%;
-  color: black;
+  background-color: var(--elements-background) !important;
+  color: var(--text-color) !important;
 }
 .card-img {
   height: 45% !important;

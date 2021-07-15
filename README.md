@@ -49,14 +49,19 @@ Users should be able to:
 - CSS Grid
 - Mobile-first workflow
 - [React](https://reactjs.org/) - JS library
+- [Flaticon](https://www.flaticon.com/) - Icon assets
 
 ### What I learned
 
-<to be filled later>
+- Quick design and development for an application frontend adhering to given specs.
+- Applying and toggling themes in applications using simple JS and CSS.
 
 ### Scope for improvement
 
-<Application can be improved for optmized use of resources and for making the UX better.Loading Spinner.Pagination.Lazy loading>
+Application can be improved for optmized use of resources and for making the UX better.
+
+- Loading Spinner.
+- Pagination
 
 ## Author
 

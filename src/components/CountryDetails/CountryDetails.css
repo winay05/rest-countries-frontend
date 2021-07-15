@@ -11,10 +11,11 @@
   width: fit-content;
   margin: 0.15rem;
   padding: 0.5rem 1rem;
-  border: lightgray 1px solid;
+  /* border: lightgray 1px solid; */
 }
 .details-control-element {
-  background-color: white !important;
+  background-color: var(--elements-background) !important;
+  color: var(--text-color) !important;
   margin-top: 0.3rem;
   margin-bottom: 0.6rem;
 }
@@ -22,6 +23,7 @@
 .details-card {
   height: fit-content !important;
   border: none !important;
+  background-color: var(--background) !important;
 }
 .neighbor-container {
   display: flex;
