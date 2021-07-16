@@ -42,7 +42,7 @@
     <script>
       function setTheme(themeName) {
         localStorage.setItem("theme", themeName);
-        document.getElementsByTagName("body").className = themeName;
+        document.getElementsByTagName("body")[0].className = themeName;
       }
       // Immediately invoked function to set the theme on initial load
       (function () {
